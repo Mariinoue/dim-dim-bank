@@ -2,7 +2,7 @@
 set -euo pipefail
 
 RM="${RM:?Defina a variavel RM. Ex.: export RM=rm999999}"
-LOCATION="${LOCATION:-brazilsouth}"
+LOCATION="${LOCATION:-chilecentral}"
 SQL_LOCATION="${SQL_LOCATION:-$LOCATION}"
 
 RESOURCE_GROUP_NAME="rg-dimdim"

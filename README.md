@@ -122,7 +122,7 @@ defina outra em `SQL_LOCATION` (ex.: `eastus2`). A senha do SQL é pedida durant
 
 ```bash
 export RM="rm999999"
-export LOCATION="brazilsouth"
+export LOCATION="chilecentral"
 bash scripts/01-criar-recursos.sh
 ```
 
