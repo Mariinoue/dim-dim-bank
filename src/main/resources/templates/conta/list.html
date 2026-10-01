@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Contas')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: header('contas')}"></nav>
+
+<main class="container mt-4 content">
+    <h1 class="page-title">Contas</h1>
+
+    <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+    <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+    <a class="btn btn-dd mb-3" th:href="@{/contas/new}"><i class="fa-solid fa-plus"></i> Abrir nova conta</a>
+
+    <div class="table-card">
+        <table class="table table-hover align-middle mb-0">
+            <thead>
+            <tr>
+                <th>Titular</th><th>Agência / Conta</th><th>Tipo</th><th>Status</th>
+                <th class="text-end">Saldo</th><th class="text-end">Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="c : ${contas}">
+                <td th:text="${c.titular}"></td>
+                <td th:text="${c.agencia + ' / ' + c.numero}"></td>
+                <td th:text="${c.tipo.label}"></td>
+                <td><span class="badge text-bg-secondary" th:text="${c.status.label}"></span></td>
+                <td class="text-end" th:text="'R$ ' + ${#numbers.formatDecimal(c.saldoAtual, 1, 'POINT', 2, 'COMMA')}"></td>
+                <td class="text-end text-nowrap">
+                    <a class="btn btn-sm btn-info" th:href="@{/contas/{id}(id=${c.id})}">Extrato</a>
+                    <a class="btn btn-sm btn-warning" th:href="@{/contas/{id}/edit(id=${c.id})}">Editar</a>
+                    <form class="d-inline" method="post" th:action="@{/contas/{id}/delete(id=${c.id})}"
+                          onsubmit="return confirm('Excluir esta conta?');">
+                        <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                    </form>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(contas)}"><td colspan="6" class="text-center text-muted">Nenhuma conta cadastrada.</td></tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+<script th:replace="~{fragments/layout :: scripts}"></script>
+</body>
+</html>

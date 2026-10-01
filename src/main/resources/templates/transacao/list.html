@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Transações')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: header('transacoes')}"></nav>
+
+<main class="container mt-4 content">
+    <h1 class="page-title">Transações</h1>
+
+    <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+    <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+    <a class="btn btn-dd mb-3" th:href="@{/transacoes/new}"><i class="fa-solid fa-plus"></i> Nova transação</a>
+
+    <div class="table-card">
+        <table class="table table-hover align-middle mb-0">
+            <thead>
+            <tr>
+                <th>Data</th><th>Conta</th><th>Tipo</th><th>Descrição</th>
+                <th class="text-end">Valor</th><th class="text-end">Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="t : ${transacoes}">
+                <td th:text="${#temporals.format(t.dataHora, 'dd/MM/yyyy HH:mm')}"></td>
+                <td th:text="${t.conta.descricao}"></td>
+                <td th:text="${t.tipo.label}"></td>
+                <td th:text="${t.descricao}"></td>
+                <td class="text-end" th:classappend="${t.tipo.credito} ? 'valor-credito' : 'valor-debito'"
+                    th:text="${(t.tipo.credito ? '+ ' : '- ') + 'R$ ' + #numbers.formatDecimal(t.valor, 1, 'POINT', 2, 'COMMA')}"></td>
+                <td class="text-end text-nowrap">
+                    <a class="btn btn-sm btn-warning" th:href="@{/transacoes/{id}/edit(id=${t.id})}">Editar</a>
+                    <form class="d-inline" method="post" th:action="@{/transacoes/{id}/delete(id=${t.id})}"
+                          onsubmit="return confirm('Excluir esta transação?');">
+                        <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                    </form>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(transacoes)}"><td colspan="6" class="text-center text-muted">Nenhuma transação registrada.</td></tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+<script th:replace="~{fragments/layout :: scripts}"></script>
+</body>
+</html>

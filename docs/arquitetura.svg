@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="Segoe UI, Roboto, Arial, sans-serif">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0b2545"/>
+    </marker>
+  </defs>
+  <rect width="900" height="470" fill="#ffffff"/>
+
+  <!-- Azure Resource Group -->
+  <rect x="270" y="20" width="610" height="430" rx="12" fill="#eef3fb" stroke="#0078d4" stroke-width="2" stroke-dasharray="8 5"/>
+  <text x="285" y="45" font-size="15" font-weight="700" fill="#0078d4">Azure &#183; Resource Group: rg-dimdim</text>
+
+  <!-- Usuario -->
+  <rect x="20" y="110" width="200" height="70" rx="10" fill="#fff8e1" stroke="#f2b705" stroke-width="2"/>
+  <text x="120" y="140" text-anchor="middle" font-size="15" font-weight="700" fill="#0b2545">Cliente / Gerente</text>
+  <text x="120" y="162" text-anchor="middle" font-size="12" fill="#444">Navegador (HTTPS)</text>
+
+  <!-- Web App -->
+  <rect x="300" y="90" width="260" height="110" rx="10" fill="#ffffff" stroke="#0b2545" stroke-width="2"/>
+  <text x="430" y="118" text-anchor="middle" font-size="15" font-weight="700" fill="#0b2545">Azure App Service (Linux, F1)</text>
+  <text x="430" y="142" text-anchor="middle" font-size="12" fill="#444">Spring Boot 3 &#183; Java 17</text>
+  <text x="430" y="160" text-anchor="middle" font-size="12" fill="#444">Spring MVC + Thymeleaf + Bootstrap</text>
+  <text x="430" y="178" text-anchor="middle" font-size="12" fill="#444">CRUD: Conta e Transa&#231;&#227;o</text>
+
+  <!-- Azure SQL -->
+  <rect x="650" y="90" width="210" height="110" rx="10" fill="#ffffff" stroke="#0b2545" stroke-width="2"/>
+  <text x="755" y="118" text-anchor="middle" font-size="15" font-weight="700" fill="#0b2545">Azure SQL Database</text>
+  <text x="755" y="142" text-anchor="middle" font-size="12" fill="#444">PaaS (Basic) &#183; dimdimdb</text>
+  <text x="755" y="160" text-anchor="middle" font-size="12" fill="#444">tabelas: conta 1 &#8212; N transacao</text>
+  <text x="755" y="178" text-anchor="middle" font-size="12" fill="#444">JDBC / TLS 1433</text>
+
+  <!-- App Insights -->
+  <rect x="300" y="270" width="260" height="80" rx="10" fill="#ffffff" stroke="#0b2545" stroke-width="2"/>
+  <text x="430" y="298" text-anchor="middle" font-size="15" font-weight="700" fill="#0b2545">Application Insights</text>
+  <text x="430" y="320" text-anchor="middle" font-size="12" fill="#444">Requisi&#231;&#245;es, depend&#234;ncias (SQL),</text>
+  <text x="430" y="336" text-anchor="middle" font-size="12" fill="#444">falhas e desempenho (agente Java)</text>
+
+  <!-- GitHub -->
+  <rect x="20" y="270" width="200" height="80" rx="10" fill="#f3f4f6" stroke="#444" stroke-width="2"/>
+  <text x="120" y="298" text-anchor="middle" font-size="15" font-weight="700" fill="#0b2545">GitHub</text>
+  <text x="120" y="320" text-anchor="middle" font-size="12" fill="#444">Reposit&#243;rio + GitHub Actions</text>
+  <text x="120" y="336" text-anchor="middle" font-size="12" fill="#444">(build Maven + deploy)</text>
+
+  <!-- Azure CLI -->
+  <rect x="20" y="380" width="200" height="60" rx="10" fill="#f3f4f6" stroke="#444" stroke-width="2"/>
+  <text x="120" y="406" text-anchor="middle" font-size="15" font-weight="700" fill="#0b2545">Azure CLI</text>
+  <text x="120" y="425" text-anchor="middle" font-size="12" fill="#444">scripts/ (cria os recursos)</text>
+
+  <!-- Setas -->
+  <line x1="220" y1="145" x2="298" y2="145" stroke="#0b2545" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="259" y="137" text-anchor="middle" font-size="11" fill="#0b2545">HTTPS</text>
+
+  <line x1="560" y1="145" x2="648" y2="145" stroke="#0b2545" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="604" y="137" text-anchor="middle" font-size="11" fill="#0b2545">JDBC</text>
+
+  <line x1="430" y1="200" x2="430" y2="268" stroke="#0b2545" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="440" y="238" font-size="11" fill="#0b2545">telemetria</text>
+
+  <line x1="220" y1="310" x2="298" y2="170" stroke="#0b2545" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="228" y="258" font-size="11" fill="#0b2545">deploy (.jar)</text>
+
+  <line x1="220" y1="410" x2="298" y2="340" stroke="#0b2545" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arr)"/>
+  <text x="232" y="395" font-size="11" fill="#0b2545">provisiona</text>
+</svg>

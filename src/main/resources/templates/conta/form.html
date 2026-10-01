@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Conta')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: header('contas')}"></nav>
+
+<main class="container mt-4 content">
+    <h1 class="page-title" th:text="${conta.id == null} ? 'Abrir conta' : 'Editar conta'">Conta</h1>
+
+    <form class="table-card p-4" method="post" th:object="${conta}"
+          th:action="${conta.id == null} ? @{/contas} : @{/contas/{id}(id=${conta.id})}">
+
+        <div th:if="${#fields.hasGlobalErrors()}" class="alert alert-danger">
+            <div th:each="e : ${#fields.globalErrors()}" th:text="${e}"></div>
+        </div>
+
+        <div class="row g-3">
+            <div class="col-md-8">
+                <label class="form-label" for="titular">Titular</label>
+                <input class="form-control" id="titular" th:field="*{titular}" th:errorclass="is-invalid" maxlength="100">
+                <div class="invalid-feedback" th:errors="*{titular}"></div>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" for="documento">CPF / CNPJ (somente números)</label>
+                <input class="form-control" id="documento" th:field="*{documento}" th:errorclass="is-invalid" maxlength="14">
+                <div class="invalid-feedback" th:errors="*{documento}"></div>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" for="tipo">Tipo</label>
+                <select class="form-select" id="tipo" th:field="*{tipo}" th:errorclass="is-invalid">
+                    <option value="">Selecione...</option>
+                    <option th:each="t : ${tipos}" th:value="${t}" th:text="${t.label}"></option>
+                </select>
+                <div class="invalid-feedback" th:errors="*{tipo}"></div>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label" for="agencia">Agência</label>
+                <input class="form-control" id="agencia" th:field="*{agencia}" th:errorclass="is-invalid" maxlength="4">
+                <div class="invalid-feedback" th:errors="*{agencia}"></div>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label" for="numero">Número da conta</label>
+                <input class="form-control" id="numero" th:field="*{numero}" th:errorclass="is-invalid" maxlength="10">
+                <div class="invalid-feedback" th:errors="*{numero}"></div>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label" for="saldoInicial">Saldo inicial (R$)</label>
+                <input class="form-control" type="number" step="0.01" min="0" id="saldoInicial" th:field="*{saldoInicial}" th:errorclass="is-invalid">
+                <div class="invalid-feedback" th:errors="*{saldoInicial}"></div>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label" for="status">Status</label>
+                <select class="form-select" id="status" th:field="*{status}" th:errorclass="is-invalid">
+                    <option th:each="s : ${statusList}" th:value="${s}" th:text="${s.label}"></option>
+                </select>
+                <div class="invalid-feedback" th:errors="*{status}"></div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-dd">Salvar</button>
+            <a class="btn btn-outline-secondary" th:href="@{/contas}">Cancelar</a>
+        </div>
+    </form>
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+<script th:replace="~{fragments/layout :: scripts}"></script>
+</body>
+</html>

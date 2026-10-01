@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Transação')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: header('transacoes')}"></nav>
+
+<main class="container mt-4 content">
+    <h1 class="page-title" th:text="${transacao.id == null} ? 'Nova transação' : 'Editar transação'">Transação</h1>
+
+    <form class="table-card p-4" method="post" th:object="${transacao}"
+          th:action="${transacao.id == null} ? @{/transacoes} : @{/transacoes/{id}(id=${transacao.id})}">
+
+        <div th:if="${#fields.hasGlobalErrors()}" class="alert alert-danger">
+            <div th:each="e : ${#fields.globalErrors()}" th:text="${e}"></div>
+        </div>
+
+        <div class="row g-3">
+            <div class="col-md-12">
+                <label class="form-label" for="conta">Conta</label>
+                <select class="form-select" id="conta" name="conta.id" th:classappend="${#fields.hasErrors('conta')} ? 'is-invalid'"
+                        th:disabled="${transacao.id != null}">
+                    <option value="">Selecione...</option>
+                    <option th:each="c : ${contas}" th:value="${c.id}" th:text="${c.descricao}"
+                            th:selected="${transacao.conta != null and transacao.conta.id == c.id}"></option>
+                </select>
+                <input type="hidden" name="conta.id" th:if="${transacao.id != null}" th:value="${transacao.conta.id}">
+                <div class="invalid-feedback" th:errors="*{conta}"></div>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" for="tipo">Tipo</label>
+                <select class="form-select" id="tipo" th:field="*{tipo}" th:errorclass="is-invalid">
+                    <option value="">Selecione...</option>
+                    <option th:each="t : ${tipos}" th:value="${t}" th:text="${t.label}"></option>
+                </select>
+                <div class="invalid-feedback" th:errors="*{tipo}"></div>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label" for="valor">Valor (R$)</label>
+                <input class="form-control" type="number" step="0.01" min="0.01" id="valor" th:field="*{valor}" th:errorclass="is-invalid">
+                <div class="invalid-feedback" th:errors="*{valor}"></div>
+            </div>
+            <div class="col-md-5">
+                <label class="form-label" for="descricao">Descrição</label>
+                <input class="form-control" id="descricao" th:field="*{descricao}" th:errorclass="is-invalid" maxlength="200">
+                <div class="invalid-feedback" th:errors="*{descricao}"></div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-dd">Salvar</button>
+            <a class="btn btn-outline-secondary" th:href="@{/transacoes}">Cancelar</a>
+        </div>
+    </form>
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+<script th:replace="~{fragments/layout :: scripts}"></script>
+</body>
+</html>

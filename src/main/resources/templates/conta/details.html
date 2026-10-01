@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Extrato')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: header('contas')}"></nav>
+
+<main class="container mt-4 content">
+    <h1 class="page-title">Extrato da conta</h1>
+
+    <div class="row g-3 mb-4">
+        <div class="col-md-8">
+            <div class="table-card p-3">
+                <div class="h5 mb-1" th:text="${conta.titular}"></div>
+                <div class="text-muted">
+                    <span th:text="${conta.tipo.label}"></span> &middot;
+                    Ag <span th:text="${conta.agencia}"></span> / Cc <span th:text="${conta.numero}"></span> &middot;
+                    Documento <span th:text="${conta.documento}"></span>
+                </div>
+                <div class="text-muted">
+                    Aberta em <span th:text="${#temporals.format(conta.dataAbertura, 'dd/MM/yyyy')}"></span> &middot;
+                    <span class="badge text-bg-secondary" th:text="${conta.status.label}"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-kpi p-3">
+                <div class="text-muted">Saldo atual</div>
+                <div class="valor" th:text="'R$ ' + ${#numbers.formatDecimal(conta.saldoAtual, 1, 'POINT', 2, 'COMMA')}"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <a class="btn btn-dd" th:href="@{/transacoes/new(contaId=${conta.id})}"><i class="fa-solid fa-plus"></i> Nova transação</a>
+        <a class="btn btn-outline-secondary" th:href="@{/contas}">Voltar</a>
+    </div>
+
+    <div class="table-card">
+        <table class="table table-hover align-middle mb-0">
+            <thead>
+            <tr><th>Data</th><th>Tipo</th><th>Descrição</th><th class="text-end">Valor</th></tr>
+            </thead>
+            <tbody>
+            <tr th:each="t : ${extrato}">
+                <td th:text="${#temporals.format(t.dataHora, 'dd/MM/yyyy HH:mm')}"></td>
+                <td th:text="${t.tipo.label}"></td>
+                <td th:text="${t.descricao}"></td>
+                <td class="text-end" th:classappend="${t.tipo.credito} ? 'valor-credito' : 'valor-debito'"
+                    th:text="${(t.tipo.credito ? '+ ' : '- ') + 'R$ ' + #numbers.formatDecimal(t.valor, 1, 'POINT', 2, 'COMMA')}"></td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(extrato)}"><td colspan="4" class="text-center text-muted">Sem movimentações.</td></tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+<script th:replace="~{fragments/layout :: scripts}"></script>
+</body>
+</html>

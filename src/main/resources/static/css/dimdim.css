@@ -1,0 +1,95 @@
+:root {
+    --dd-navy: #0b2545;
+    --dd-blue: #13315c;
+    --dd-gold: #f2b705;
+    --dd-bg: #f3f5f9;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: var(--dd-bg);
+    color: #1f2937;
+    font-family: 'Roboto', sans-serif;
+}
+
+.content {
+    flex: 1;
+}
+
+.navbar-dd {
+    background: linear-gradient(90deg, var(--dd-navy), var(--dd-blue));
+}
+
+.navbar-dd .navbar-brand,
+.navbar-dd .nav-link {
+    color: #fff;
+}
+
+.navbar-dd .nav-link:hover,
+.navbar-dd .nav-link.active {
+    color: var(--dd-gold);
+}
+
+.brand-coin {
+    color: var(--dd-gold);
+}
+
+h1.page-title {
+    color: var(--dd-navy);
+    font-weight: 700;
+    font-size: 1.9rem;
+    margin-bottom: 1.25rem;
+}
+
+.btn-dd {
+    background: var(--dd-gold);
+    color: var(--dd-navy);
+    border: none;
+    font-weight: 700;
+}
+
+.btn-dd:hover {
+    background: #d9a404;
+    color: var(--dd-navy);
+}
+
+.card-kpi {
+    border: none;
+    border-left: 5px solid var(--dd-gold);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.card-kpi .valor {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--dd-navy);
+}
+
+.table-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    padding: 0.5rem 1rem;
+}
+
+.valor-credito {
+    color: #15803d;
+    font-weight: 500;
+}
+
+.valor-debito {
+    color: #b91c1c;
+    font-weight: 500;
+}
+
+footer.footer-dd {
+    background: var(--dd-navy);
+    color: #cbd5e1;
+    padding: 1rem 0;
+    margin-top: 3rem;
+    text-align: center;
+    font-size: 0.9rem;
+}

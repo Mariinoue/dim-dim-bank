@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Início')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: header('home')}"></nav>
+
+<main class="container mt-4 content">
+    <h1 class="page-title">Bem-vindo ao DimDim Digital</h1>
+    <p class="text-muted">Acompanhe contas e movimentações do banco em um só lugar.</p>
+
+    <div class="row g-3 mb-4">
+        <div class="col-md-4">
+            <div class="card card-kpi p-3">
+                <div class="text-muted">Contas ativas</div>
+                <div class="valor" th:text="${contasAtivas}">0</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-kpi p-3">
+                <div class="text-muted">Transações registradas</div>
+                <div class="valor" th:text="${totalTransacoes}">0</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-kpi p-3">
+                <div class="text-muted">Saldo total (contas ativas)</div>
+                <div class="valor" th:text="'R$ ' + ${#numbers.formatDecimal(saldoTotal, 1, 'POINT', 2, 'COMMA')}">R$ 0,00</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-4">
+        <a class="btn btn-dd me-2" th:href="@{/contas/new}"><i class="fa-solid fa-user-plus"></i> Abrir conta</a>
+        <a class="btn btn-outline-dark" th:href="@{/transacoes/new}"><i class="fa-solid fa-money-bill-transfer"></i> Nova transação</a>
+    </div>
+
+    <h2 class="h5">Últimas transações</h2>
+    <div class="table-card">
+        <table class="table table-hover align-middle mb-0">
+            <thead>
+            <tr><th>Data</th><th>Conta</th><th>Tipo</th><th class="text-end">Valor</th></tr>
+            </thead>
+            <tbody>
+            <tr th:each="t : ${ultimas}">
+                <td th:text="${#temporals.format(t.dataHora, 'dd/MM/yyyy HH:mm')}"></td>
+                <td th:text="${t.conta.descricao}"></td>
+                <td th:text="${t.tipo.label}"></td>
+                <td class="text-end" th:classappend="${t.tipo.credito} ? 'valor-credito' : 'valor-debito'"
+                    th:text="${(t.tipo.credito ? '+ ' : '- ') + 'R$ ' + #numbers.formatDecimal(t.valor, 1, 'POINT', 2, 'COMMA')}"></td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(ultimas)}"><td colspan="4" class="text-center text-muted">Nenhuma transação ainda.</td></tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+<script th:replace="~{fragments/layout :: scripts}"></script>
+</body>
+</html>
